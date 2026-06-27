@@ -108,9 +108,7 @@ export default function handler(req, res) {
     const cleanPath = pathname.replace('/api/', '');
     
     if (cleanPath === 'leads') {
-        const cities = [...new Set(leads.map(l => l.city).filter(Boolean))];
-        const categories = [...new Set(leads.map(l => l.category).filter(Boolean))];
-        res.status(200).json({ leads, total: leads.length, cities: cities.length, categories: categories.length, _src: loadedFrom });
+        res.status(200).json(leads);
     } else if (cleanPath === 'stats') {
         const cities = [...new Set(leads.map(l => l.city).filter(Boolean))];
         const categories = [...new Set(leads.map(l => l.category).filter(Boolean))];
