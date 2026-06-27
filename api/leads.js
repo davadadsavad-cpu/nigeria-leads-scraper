@@ -62,20 +62,7 @@ export default function handler(req, res) {
         return result;
     }
     
-    // Debug endpoint
-    if (pathname === '/api/files') {
-        const info = {};
-        info.cwd = process.cwd();
-        try { info.haveReports = fs.existsSync('/var/task/api/reports/mixed_leads_latest.csv'); } catch(e) {}
-        try {
-            const raw = fs.readFileSync('/var/task/api/reports/mixed_leads_latest.csv', 'utf-8');
-            const content = raw.replace(/^\uFEFF/, '');
-            info.lineCount = content.split('\n').length;
-            info.firstLine = content.split('\n')[0];
-        } catch(e) { info.err = e.message; }
-        res.status(200).json(info);
-        return;
-    }
+
     
     // Load leads
     let leads = [];
@@ -116,8 +103,7 @@ export default function handler(req, res) {
             total_leads: leads.length,
             cities_count: cities.length,
             categories_count: categories.length,
-            feedback_count: 0,
-            _src: loadedFrom
+            feedback_count: feedbacks.length
         });
     } else {
         res.status(404).json({ error: 'Not found' });
