@@ -9,9 +9,41 @@ from datetime import datetime
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import parse_qs, urlparse
 
-LEADS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reports")
+import sys
+# Try multiple possible locations for reports
+_POSSIBLE_DIRS = [
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "reports"),  # api/reports/
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "api", "reports"),  # ../api/reports
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "website", "reports"),  # ../website/reports
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."),  # project root
+    "/var/task/api/reports",  # Vercel serverless path
+    os.path.join("/var/task", "api", "reports"),
+]
+
+LEADS_DIR = None
+for d in _POSSIBLE_DIRS:
+    if os.path.exists(d) and os.path.isdir(d):
+        candidate = os.path.join(d, "mixed_leads_latest.csv")
+        if os.path.exists(candidate):
+            LEADS_DIR = d
+            break
+
+if LEADS_DIR is None:
+    # Fallback to first path and hope for thebest
+    LEADS_DIR = _POSSIBLE_DIRS[0]
+
+# Project root is parent of api/ or current dir
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if not os.path.exists(os.path.join(PROJECT_DIR, "api")):
+    PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+
 FEEDBACK_FILE = os.path.join(PROJECT_DIR, "feedbacks.json")
+
+# Debug info
+print(f"[API] LEADS_DIR={LEADS_DIR}")
+print(f"[API] PROJECT_DIR={PROJECT_DIR}")
+print(f"[API] FEEDBACK_FILE={FEEDBACK_FILE}")
+print(f"[API] Files in LEADS_DIR: {os.listdir(LEADS_DIR) if os.path.exists(LEADS_DIR) else 'NOT FOUND'}")
 
 # Load leads from CSV files
 def load_leads():
