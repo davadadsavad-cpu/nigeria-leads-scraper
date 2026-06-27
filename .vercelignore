@@ -1,0 +1,6 @@
+# Don't include CSVs in the Python build
+*.csv
+!api/reports/
+!api/reports/*.csv
+website/reports/
+nigeria_leads.csv
