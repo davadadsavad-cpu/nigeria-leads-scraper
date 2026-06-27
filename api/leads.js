@@ -83,7 +83,8 @@ export default function handler(req, res) {
     
     if (fs.existsSync(csvPath)) {
         try {
-            const csv = fs.readFileSync(csvPath, 'utf-8-sig');
+            const raw = fs.readFileSync(csvPath, 'utf-8');
+            const csv = raw.replace(/^\uFEFF/, '');
             leads = parseCSV(csv);
             loadedFrom = csvPath;
         } catch(e) {
