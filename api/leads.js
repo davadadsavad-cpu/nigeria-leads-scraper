@@ -68,7 +68,8 @@ export default function handler(req, res) {
         info.cwd = process.cwd();
         try { info.haveReports = fs.existsSync('/var/task/api/reports/mixed_leads_latest.csv'); } catch(e) {}
         try {
-            const content = fs.readFileSync('/var/task/api/reports/mixed_leads_latest.csv', 'utf-8-sig');
+            const raw = fs.readFileSync('/var/task/api/reports/mixed_leads_latest.csv', 'utf-8');
+            const content = raw.replace(/^\uFEFF/, '');
             info.lineCount = content.split('\n').length;
             info.firstLine = content.split('\n')[0];
         } catch(e) { info.err = e.message; }
