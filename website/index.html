@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nigeria Leads - Feedback & Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Nigeria Business Leads</h1>
+            <p class="subtitle">Daily leads • Feedback • Search & Export</p>
+        </header>
+
+        <!-- Lead Stats -->
+        <section class="stats-section">
+            <div class="stat-card">
+                <span class="stat-number" id="total-leads">0</span>
+                <span class="stat-label">Total Leads</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="cities-count">0</span>
+                <span class="stat-label">Cities Covered</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="categories-count">0</span>
+                <span class="stat-label">Categories</span>
+            </div>
+        </section>
+
+        <!-- Controls -->
+        <section class="controls-section">
+            <div class="search-controls">
+                <input type="text" id="search" placeholder="Search leads by name, city, or category...">
+                <select id="filter-city">
+                    <option value="all">All Cities</option>
+                </select>
+                <select id="filter-category">
+                    <option value="all">All Categories</option>
+                </select>
+            </div>
+            <div class="bulk-actions">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="select-all"> Select All
+                </label>
+                <button id="export-selected" class="btn-secondary">📋 Export Selected</button>
+                <button id="export-all" class="btn-secondary">📁 Export All</button>
+            </div>
+        </section>
+
+        <!-- Leads List -->
+        <section class="list-section">
+            <h2>Business Leads</h2>
+            <div id="leads-list"></div>
+        </section>
+
+        <!-- Feedback Form -->
+        <section class="form-section">
+            <h2>Add Feedback to Lead</h2>
+            <form id="feedback-form">
+                <div class="form-group">
+                    <label for="lead-select">Select Lead</label>
+                    <select id="lead-select" required>
+                        <option value="">-- Choose a lead --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="feedback-name">Your Name (optional)</label>
+                    <input type="text" id="feedback-name" placeholder="Your name">
+                </div>
+                <div class="form-group">
+                    <label for="feedback-text">Feedback</label>
+                    <textarea id="feedback-text" rows="3" placeholder="Notes about this lead..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Rating</label>
+                    <div class="star-rating">
+                        <span class="star" data-value="1">&#9733;</span>
+                        <span class="star" data-value="2">&#9733;</span>
+                        <span class="star" data-value="3">&#9733;</span>
+                        <span class="star" data-value="4">&#9733;</span>
+                        <span class="star" data-value="5">&#9733;</span>
+                    </div>
+                    <input type="hidden" id="rating" value="0">
+                </div>
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select id="status">
+                        <option value="New">New</option>
+                        <option value="Contacted">Contacted</option>
+                        <option value="Qualified">Qualified</option>
+                        <option value="Converted">Converted</option>
+                        <option value="Lost">Lost</option>
+                    </select>
+                </div>
+                <button type="submit">Save Feedback</button>
+            </form>
+        </section>
+
+        <!-- All Feedback -->
+        <section class="list-section">
+            <h2>Lead Feedback</h2>
+            <div class="filter-bar">
+                <input type="text" id="search-feedback" placeholder="Search feedback...">
+                <select id="filter-feedback-status">
+                    <option value="all">All Statuses</option>
+                    <option value="New">New</option>
+                    <option value="Contacted">Contacted</option>
+                    <option value="Qualified">Qualified</option>
+                    <option value="Converted">Converted</option>
+                    <option value="Lost">Lost</option>
+                </select>
+            </div>
+            <div id="feedback-list"></div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

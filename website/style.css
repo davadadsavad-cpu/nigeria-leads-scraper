@@ -1,0 +1,347 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #f5f7fa;
+    color: #1a1a2e;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 32px 20px;
+}
+
+header {
+    margin-bottom: 32px;
+}
+
+h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a2e;
+}
+
+.subtitle {
+    color: #666;
+    margin-top: 8px;
+}
+
+/* Stats Section */
+.stats-section {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    flex: 1;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.stat-number {
+    display: block;
+    font-size: 32px;
+    font-weight: 700;
+    color: #007aff;
+}
+
+.stat-label {
+    color: #666;
+    font-size: 14px;
+}
+
+/* Controls */
+.controls-section {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.search-controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.search-controls input,
+.search-controls select {
+    flex: 1;
+    min-width: 180px;
+    padding: 10px 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.bulk-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    padding: 8px 16px;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.btn-secondary:not(:disabled):hover {
+    background: #e0e0e0;
+}
+
+.btn-secondary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Lead Cards */
+.lead-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    border-left: 4px solid #007aff;
+}
+
+.lead-card.has-feedback {
+    border-left-color: #34c759;
+}
+
+.lead-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.lead-header h3 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.category-badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 4px 8px;
+    background: #e0f0ff;
+    color: #007aff;
+    border-radius: 4px;
+    margin-left: 8px;
+}
+
+.rating-badge {
+    font-size: 14px;
+    color: #ff9500;
+}
+
+.lead-details p {
+    margin: 6px 0;
+    font-size: 14px;
+    color: #444;
+}
+
+.lead-details a {
+    color: #007aff;
+    text-decoration: none;
+}
+
+.feedback-preview {
+    background: #f8f9fa;
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 13px;
+    margin-top: 8px;
+    color: #666;
+}
+
+/* Feedback Cards */
+.feedback-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.card-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.card-rating {
+    color: #ff9500;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-badge.New { background: #e0e0e0; color: #333; }
+.status-badge.Contacted { background: #cce5ff; color: #007aff; }
+.status-badge.Qualified { background: #fff3cd; color: #ff9500; }
+.status-badge.Converted { background: #d4edda; color: #34c759; }
+.status-badge.Lost { background: #f8d7da; color: #dc3545; }
+
+.card-date {
+    font-size: 12px;
+    color: #888;
+}
+
+/* Forms */
+.form-section {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.star-rating {
+    display: flex;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.star {
+    font-size: 24px;
+    color: #ddd;
+    transition: color 0.2s;
+}
+
+.star.active,
+.star:hover,
+.star:hover ~ .star {
+    color: #ff9500;
+}
+
+.star:hover ~ .star {
+    color: #ddd;
+}
+
+/* List Section */
+.list-section {
+    margin-bottom: 32px;
+}
+
+.list-section h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.filter-bar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.filter-bar input {
+    flex: 1;
+    min-width: 200px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.filter-bar select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #888;
+    background: white;
+    border-radius: 12px;
+}
+
+/* Lead select dropdown */
+#lead-select {
+    min-width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .stats-section {
+        flex-direction: column;
+    }
+    
+    .lead-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
