@@ -2,8 +2,8 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/index.py",
-      "use": "@vercel/python"
+      "src": "api/**",
+      "use": "@vercel/node"
     },
     {
       "src": "*.html",
@@ -16,12 +16,16 @@
     {
       "src": "*.js",
       "use": "@vercel/static"
+    },
+    {
+      "src": "api/reports/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/index.py"
+      "dest": "/api/leads.js"
     },
     {
       "src": "/",
