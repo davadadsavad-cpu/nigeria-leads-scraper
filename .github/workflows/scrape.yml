@@ -30,7 +30,31 @@ jobs:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
       run: |
         python scraper.py
-        cp website/api.py ./ 2>/dev/null || true
+
+    - name: Generate leads-data.json for website
+      run: |
+        python -c "
+        import csv, json
+        leads = []
+        with open('api/reports/mixed_leads_latest.csv', encoding='utf-8-sig') as f:
+            for row in csv.DictReader(f):
+                leads.append({
+                    'id': row.get('lead_id', ''),
+                    'name': row.get('business_name', ''),
+                    'phone': row.get('phone', ''),
+                    'email': row.get('email', ''),
+                    'address': row.get('address', ''),
+                    'city': row.get('city', ''),
+                    'state': row.get('state', ''),
+                    'website': row.get('website', ''),
+                    'rating': row.get('rating', ''),
+                    'category': row.get('category', ''),
+                    'source': row.get('source', 'serper')
+                })
+        with open('leads-data.json', 'w') as f:
+            json.dump(leads, f, indent=2)
+        print(f'Generated leads-data.json with {len(leads)} leads')
+        "
 
     - name: Upload CSV artifact
       uses: actions/upload-artifact@v4
@@ -43,6 +67,6 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add nigeria_leads.csv summary.json website/reports/ api/reports/
+        git add nigeria_leads.csv summary.json website/reports/ api/reports/ leads-data.json
         git diff --quiet && git diff --staged --quiet || git commit -m "Daily leads update - $(date +%Y-%m-%d)"
         git push

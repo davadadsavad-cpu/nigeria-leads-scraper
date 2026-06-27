@@ -8,9 +8,9 @@ let selectedLeads = new Set();
 async function loadData() {
     try {
         const [leadsRes, feedbacksRes, statsRes] = await Promise.all([
-            fetch(API_BASE + "/leads"),
-            fetch(API_BASE + "/feedbacks"),
-            fetch(API_BASE + "/stats")
+            fetch("/leads-data.json"),
+            fetch("/api/feedbacks"),
+            fetch("/api/stats")
         ]);
         leads = await leadsRes.json();
         feedbacks = await feedbacksRes.json();
@@ -110,6 +110,7 @@ document.getElementById("select-all").addEventListener("change", (e) => {
 });
 
 document.getElementById("export-all").addEventListener("click", () => {
+    if (!leads || leads.length === 0) { alert("No leads to export"); return; }
     const csv = "Name,Phone,Category,City,State,Website,Rating\n" +
         leads.map(l => `"${escapeCsv(l.name)}","${escapeCsv(l.phone)}","${escapeCsv(l.category)}","${escapeCsv(l.city)}","${escapeCsv(l.state)}","${escapeCsv(l.website)}","${escapeCsv(l.rating)}"`).join("\n");
     downloadCSV(csv, "all_leads.csv");
@@ -117,6 +118,7 @@ document.getElementById("export-all").addEventListener("click", () => {
 
 document.getElementById("export-selected").addEventListener("click", () => {
     const selected = leads.filter(l => selectedLeads.has(l.id));
+    if (selected.length === 0) { alert("No leads selected"); return; }
     const csv = "Name,Phone,Category,City,State,Website,Rating\n" +
         selected.map(l => `"${escapeCsv(l.name)}","${escapeCsv(l.phone)}","${escapeCsv(l.category)}","${escapeCsv(l.city)}","${escapeCsv(l.state)}","${escapeCsv(l.website)}","${escapeCsv(l.rating)}"`).join("\n");
     downloadCSV(csv, "selected_leads.csv");
