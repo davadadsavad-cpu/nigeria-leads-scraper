@@ -1,27 +1,10 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "api/**",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "*.html",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "*.css",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "*.js",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "api/reports/**",
-      "use": "@vercel/static"
+  "functions": {
+    "api/leads.js": {
+      "includeFiles": "api/reports/**"
     }
-  ],
+  },
   "routes": [
     {
       "src": "/api/(.*)",
@@ -32,7 +15,15 @@
       "dest": "/index.html"
     },
     {
-      "src": "/(.*)",
+      "src": "/style.css",
+      "dest": "/style.css"
+    },
+    {
+      "src": "/app.js",
+      "dest": "/app.js"
+    },
+    {
+      "src": "/(.*\\.html)",
       "dest": "/$1"
     }
   ]
