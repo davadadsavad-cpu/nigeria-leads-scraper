@@ -1,0 +1,46 @@
+name: Daily Nigeria Leads Scraper
+
+on:
+  schedule:
+    # 9:00 AM Italy time (CET = UTC+1, CEST = UTC+2)
+    # Using 7:00 UTC = 8:00 CET (winter) / 9:00 CEST (summer)
+    - cron: '0 7 * * *'
+  workflow_dispatch:  # Allow manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  scrape-and-email:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          playwright install chromium
+          playwright install-deps
+
+      - name: Run scraper + email pipeline
+        env:
+          SERP_API_KEY: ${{ secrets.SERP_API_KEY }}
+          SMTP_APP_PASSWORD: ${{ secrets.SMTP_APP_PASSWORD }}
+        run: python pipeline.py
+
+      - name: Upload leads CSV as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nigeria-leads-${{ github.run_id }}
+          path: reports/nigeria_leads.csv
+          retention-days: 30
