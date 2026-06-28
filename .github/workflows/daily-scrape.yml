@@ -31,11 +31,8 @@ jobs:
           playwright install chromium
           playwright install-deps
 
-      - name: Run scraper + email pipeline
-        env:
-          SERP_API_KEY: ${{ secrets.SERP_API_KEY }}
-          SMTP_APP_PASSWORD: ${{ secrets.SMTP_APP_PASSWORD }}
-        run: python pipeline.py
+      - name: Run scraper
+        run: python scraper.py
 
       - name: Upload leads CSV as artifact
         if: always()
